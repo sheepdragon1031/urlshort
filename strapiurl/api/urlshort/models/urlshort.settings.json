@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "urlshorts",
+  "info": {
+    "name": "urlshort",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "url2": {
+      "type": "string"
+    },
+    "userid": {
+      "type": "string"
+    },
+    "metatitle": {
+      "type": "string"
+    },
+    "metatext": {
+      "type": "text"
+    },
+    "metaimg": {
+      "type": "string"
+    }
+  }
+}

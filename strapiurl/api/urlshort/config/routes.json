@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/urlshorts",
+      "handler": "urlshort.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/urlshorts/count",
+      "handler": "urlshort.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/urlshorts/:id",
+      "handler": "urlshort.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/urlshorts",
+      "handler": "urlshort.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/urlshorts/:id",
+      "handler": "urlshort.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/urlshorts/:id",
+      "handler": "urlshort.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
