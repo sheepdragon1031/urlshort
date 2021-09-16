@@ -3,8 +3,10 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { getSession, signIn, signOut } from "next-auth/client";
+import { getSession, useSession, signIn, signOut } from "next-auth/client";
 import { Link } from '@material-ui/core';
+import Router from 'next/router'
+import React, { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
     textField:{
@@ -14,11 +16,18 @@ const useStyles = makeStyles((theme) => ({
         margin: '.25rem .5rem'
     }
 }))
-const postLogin = () =>{
 
-}
-const Login = () => {
+
+export default function Login(){
     const classes = useStyles();
+    const [ session, loading ] = useSession()
+    
+    useEffect(() => {
+        if(session){
+            Router.push('/')
+        }
+    });
+    
     return (
         <>
         <Appbar />
@@ -41,6 +50,13 @@ const Login = () => {
         
       </>
      )
+     
 }
 
-export default Login
+export async function getServerSideProps(context) {
+    return {
+      props: {
+        session: await getSession(context)
+      }
+    }
+  }
