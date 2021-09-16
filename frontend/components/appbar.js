@@ -5,7 +5,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link'
-import { useSession, signIn, signOut } from "next-auth/client"
+import { useSession, getSession , signIn, signOut } from "next-auth/client"
+import { GetServerSideProps } from 'next'
 
 const useStyles = makeStyles({
     appbar: {
@@ -19,9 +20,10 @@ const useStyles = makeStyles({
 
 
 
-const Appbar = ({}) => {
-    const [session, loading] = useSession()
+const Appbar = ({  }) => {
+    const [ session, loading ] = useSession()
     const signInButton = () => {
+        
         if (session) {
             return false;
         }
@@ -32,17 +34,23 @@ const Appbar = ({}) => {
         );
     };
     const signOutButton = () => {
+        
         if (!session) {
             return false;
         }
         return (
-        <Button color="inherit"
-            onClick={(e) => {
-                e.preventDefault();
-                signOut();
-            }} >
-            Sign Out
-        </Button>
+            <>
+                <Typography>
+                    {session.user.email}
+                </Typography>
+                <Button color="inherit"
+                    onClick={(e) => {
+                    e.preventDefault();
+                    signOut();
+                    }} >
+                     Sign Out
+                </Button>
+            </>
         );
     };
     const classes = useStyles();
@@ -62,6 +70,14 @@ const Appbar = ({}) => {
   }
  
   
+
 export default Appbar;
 
+export async function getServerSideProps(context) {
+    return {
+      props: {
+        session: await getSession(context)
+      }
+    }
+  }
 
