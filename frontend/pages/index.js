@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles';
 
+import { getSession, signIn, signOut } from "next-auth/client";
 
 let hostip = "http://localhost:1337/"
 
@@ -38,9 +39,9 @@ const shortCode = (num) =>{
   return atoz[num]  
 }
 
-
 export default function Home() {
   const [urlList, seturlList] = useState([]);
+  
   
   const classes = useStyles();
   const router = useRouter()

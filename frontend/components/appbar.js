@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link'
+import { useSession, signIn, signOut } from "next-auth/client"
 
 const useStyles = makeStyles({
     appbar: {
@@ -14,20 +15,53 @@ const useStyles = makeStyles({
         flexGrow: 1,
     },
 })
-function Appbar() {
+
+
+
+
+const Appbar = ({}) => {
+    const [session, loading] = useSession()
+    const signInButton = () => {
+        if (session) {
+            return false;
+        }
+        return (
+        <Button color="inherit" >
+            <Link href="/login">Login</Link>
+        </Button>
+        );
+    };
+    const signOutButton = () => {
+        if (!session) {
+            return false;
+        }
+        return (
+        <Button color="inherit"
+            onClick={(e) => {
+                e.preventDefault();
+                signOut();
+            }} >
+            Sign Out
+        </Button>
+        );
+    };
     const classes = useStyles();
     return (
         <div className={classes.appbar}>
         <AppBar position="static">
           <Toolbar> 
             <Typography variant="h6" className={classes.title}>
-            <Link href="/">URL2URL</Link>
+                <Link href="/">URL2URL</Link>
             </Typography>
-            <Button color="inherit" > <Link href="/login">Login</Link></Button>
+            {signOutButton()}
+            {signInButton()}
           </Toolbar>
         </AppBar>
       </div>
     );
   }
+ 
   
-  export default Appbar;
+export default Appbar;
+
+
