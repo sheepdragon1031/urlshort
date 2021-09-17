@@ -2,6 +2,14 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/url/:urlID",
+      "handler": "urlshort.getURL",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/urlshorts",
       "handler": "urlshort.find",
       "config": {

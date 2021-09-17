@@ -29,6 +29,11 @@
     },
     "metaimg": {
       "type": "string"
+    },
+    "view": {
+      "default": "0",
+      "min": "0",
+      "type": "biginteger"
     }
   }
 }
