@@ -12,7 +12,7 @@
   "devDependencies": {},
   "dependencies": {
     "knex": "0.21.18",
-    "open-graph": "^0.2.6",
+    "open-graph-scraper": "^4.9.2",
     "sqlite3": "5.0.0",
     "strapi": "3.6.8",
     "strapi-admin": "3.6.8",
