@@ -9,6 +9,22 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/url/:urlID",
+      "handler": "urlshort.newURL",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/url/:urlID",
+      "handler": "urlshort.putURL",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/urlshorts",
       "handler": "urlshort.find",
