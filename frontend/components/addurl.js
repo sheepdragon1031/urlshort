@@ -2,34 +2,50 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-function addUrl({posturl}){
+
+
+
+function AddUrl({postUrl, createID}){
+    const UseStyles = makeStyles({
+        Button: {
+            margin: 'auto',
+            left: 0,
+            right: 0,
+            display: 'block',
+            margin: '0.5rem auto'
+        },
+        TextField:{
+            padding: '0 0.5rem'
+        }
+    })
+    const classes = UseStyles();
     return (
         <div>
           <div className="addUrl">
                 <TextField 
-                    className="addText"
+                    className={classes.TextField}
                     label="Add new url here..."
                     id="urlText"
+                    fullWidth
                     onKeyDown={(e) => {
                         if (e.code === "Enter") {
-                            posturl(urlText.value);
+                            postUrl(urlText.value, createID);
                             urlText.value = "";
                         }
                     }}
                 />
                 <Button 
-                    className="addButton"
+                    className={classes.Button}
                     variant="contained"
                     onClick={() => {
-                        console.log(posturl)
-                        posturl(urlText.value);
+                        postUrl(urlText.value, createID);
                         urlText.value = "";
                     }}
                 >
-                    Add Todo
+                    Add URL
                 </Button>
             </div>
         </div>
       );
 }
-export default addUrl;
+export default AddUrl;
