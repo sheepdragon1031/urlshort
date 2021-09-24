@@ -25,21 +25,23 @@ export const postUrl = async (urlText, createID) => {
       now = parseInt(now / num);
     }
     if (urlText && urlText.length > 0) {
-      await axios.get(urlText)
+      console.log(urlText);
+      return await axios.get(urlText)
       .then(async (response) =>{
-        await postInput(urlcode, urlText, createID)
+        return await postInput(urlcode, urlText, createID)
       })
       .catch(async (error) =>{
         if(error.response){
           if(error.response.status == 404){
+            return 'not working web url'
             console.log('not working web url')
           }
           else{
-            await postInput(urlcode, urlText, createID)
+            return await postInput(urlcode, urlText, createID)
           }
         }
         else if(error == 'Error: Network Error'){
-          await postInput(urlcode, urlText, createID)
+          return await postInput(urlcode, urlText, createID)
           console.log('Just CORS Error but working')
         }
       })
@@ -48,28 +50,28 @@ export const postUrl = async (urlText, createID) => {
 
   export const putUrl = async (pid, urlText) => {
     if (urlText && urlText.length > 0) {
-      await axios.get(urlText)
+      return await axios.get(urlText)
       .then(async (response) =>{
-        await putInput(pid, urlText)
+        return await putInput(pid, urlText)
       })
       .catch(async (error) =>{
         if(error.response){
           if(error.response.status == 404){
+            return 'not working web url'
             console.log('not working web url')
           }
           else{
-            await putInput(pid,urlText)
+            return await putInput(pid,urlText)
           }
         }
         else if(error == 'Error: Network Error'){
-          await putInput(pid, urlText)
+          return await putInput(pid, urlText)
           console.log('Just CORS Error but working')
         }
       })
     }
   }
   export const putMeta = async (pid, meta) => {
-    console.log(pid, meta, 'FFF');
     const data = {
       metatitle: meta.metaTitle,
       metaimg: meta.metaImage,
@@ -78,18 +80,22 @@ export const postUrl = async (urlText, createID) => {
     let re = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/urlshorts/${pid}`, {
       ...data    
     });
-    console.log(re);
+    return re
   }
   export const putInput = async ( pid, urlText) =>{
-    await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/url/${pid}`, {
+    return await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/url/${pid}`, {
         url2: urlText,     
+    }).then(response =>{
+      return response.data 
     });
   }
   export const postInput = async (urlcode, urlText, createID) =>{
-    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/url/${urlcode.join('')}`, {
+    return await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/url/${urlcode.join('')}`, {
         // url: urlcode.join('') ,
         url2: urlText,
         userid: createID,
       // view: 0
+    }).then(response =>{
+        return response.data 
     });
   }
