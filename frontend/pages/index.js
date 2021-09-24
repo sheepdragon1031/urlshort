@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { useSession, signIn, signOut } from "next-auth/client"
 import Container from '@material-ui/core/Container';
+import Alert from '@material-ui/lab/Alert';
 
 let hostip = "http://localhost:1337"
 
@@ -33,15 +34,15 @@ const useStyles = makeStyles({
 });
 
 export default function Home() {
-  const [urlList, seturlList] = useState([]);
-  
   const [session, loading] = useSession()
+  const [urlList, seturlList] = useState([]);
   const classes = useStyles();
-  let userID = session? session.user.email : '@anonymous$'
-  console.log(session);
+  const userID = session? session.user.email : '@anonymous$'
+  const [alert, setAlert] = useState(false);
+
   const indexurl = async (userID) =>{
     const result = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/urlshorts?userid=${userID}`);
-    // console.log(result);
+    console.log(userID);
     seturlList(result?.data);
   }
   useEffect(async () => {
@@ -52,16 +53,32 @@ export default function Home() {
     await deleUrl(pid)
     indexurl(userID)
   }, [])
-
+  const errorAlert = (res) =>{
+    if(res == "not working web url"){
+      setAlert("not working web url")
+    }
+    else if(res.message == "This url wrong site orientatio"){
+      setAlert("This url wrong site orientatio")
+    }
+    else if(res.message == " This url has already been used"){
+      setAlert(res.message == " This url has already been used")
+    }
+    else{
+      setAlert(false)
+    }
+  }
   const postUrlCallBack = useCallback(async (pid) => {
-    console.log(userID);
-    await postUrl(pid, userID)
+    
+    let res = await postUrl(pid, userID)
     indexurl(userID)
+    errorAlert(res)
+    
   }, [])
  
   const putURLCallBack = useCallback(async (pid, url2) => {
-    await putUrl(pid, url2)
+    let res = await putUrl(pid, url2)
     indexurl(userID)
+    errorAlert(res)
   }, [])
 
   const putMetaCallBack = useCallback(async (pid, meta) => {
@@ -79,6 +96,9 @@ export default function Home() {
       <Appbar />
       <Container  maxWidth="sm">
         <Header />
+        { alert?
+          <Alert severity="error">{alert}</Alert>
+          :<></>}
         <Addurl postUrl={postUrlCallBack} />
         <Getitem urlList={urlList}  deleUrl={deleteURLCallBack} putURL={putURLCallBack} putMeta={putMetaCallBack} />
       </Container>
