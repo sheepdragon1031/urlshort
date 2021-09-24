@@ -1,4 +1,4 @@
-## Packages
+# Packages
 
 ### 1. Frontend: Next.js application
 
@@ -16,6 +16,7 @@ Strapi is the leading open-source headless CMS. It’s 100% JavaScript, fully cu
 ### 2. Install 
 ```sh
 cd frontend && yarn install
+
 cd strapiurl && yarn install
 ```
 
@@ -31,3 +32,15 @@ yarn dev:frontend
 ```sh
 yarn dev:backend
 ```
+
+# page
+
+## index
+![](https://i.imgur.com/kxI6Xmh.png)
+
+* Use Add new url here... to generate web pages
+* UseEnter or checked button(ALL URL)
+* Delete icon is to delete the short URL
+* Edit icon is to change a URL
+* Analysis icon is a custom Open Graph Metadata
+* OpenInBrowserIcon is to go to the page
