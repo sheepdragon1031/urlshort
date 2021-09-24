@@ -57,8 +57,8 @@ export default function Home() {
     if(res == "not working web url"){
       setAlert("not working web url")
     }
-    else if(res.message == "This url wrong site orientatio"){
-      setAlert("This url wrong site orientatio")
+    else if(res.message == "This url wrong site orientation"){
+      setAlert("This url wrong site orientation")
     }
     else if(res.message == " This url has already been used"){
       setAlert(res.message == " This url has already been used")
@@ -68,11 +68,9 @@ export default function Home() {
     }
   }
   const postUrlCallBack = useCallback(async (pid) => {
-    
     let res = await postUrl(pid, userID)
     indexurl(userID)
     errorAlert(res)
-    
   }, [])
  
   const putURLCallBack = useCallback(async (pid, url2) => {
@@ -84,7 +82,7 @@ export default function Home() {
   const putMetaCallBack = useCallback(async (pid, meta) => {
     // console.log(pid, meta);
     await putMeta(pid, meta)
-    // indexurl(userID)
+    indexurl(userID)
   }, [])
   
   return (
