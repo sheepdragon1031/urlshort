@@ -24,7 +24,7 @@ cd strapiurl && yarn install
 
 #### frontend directory Create and copy the Google client credentials
 
-### 4. Start the frontend and strapiurl application
+### 4. Start develop the frontend and strapiurl application
 
 ```sh
 yarn dev:frontend
