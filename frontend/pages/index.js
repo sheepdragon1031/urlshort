@@ -57,11 +57,13 @@ export default function Home() {
     if(res == "not working web url"){
       setAlert("not working web url")
     }
-    else if(res.message == "This url wrong site orientation"){
-      setAlert("This url wrong site orientation")
-    }
-    else if(res.message == " This url has already been used"){
-      setAlert(res.message == " This url has already been used")
+    else if(res.message){
+      if(res.message == "This url wrong site orientation"){
+        setAlert("This url wrong site orientation")
+      }
+      else if(res.message == " This url has already been used"){
+        setAlert(res.message == " This url has already been used")
+      }
     }
     else{
       setAlert(false)
