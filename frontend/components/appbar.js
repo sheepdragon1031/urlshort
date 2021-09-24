@@ -28,8 +28,11 @@ const Appbar = ({  }) => {
             return false;
         }
         return (
-        <Button color="inherit" >
-            <Link href="/login">Login</Link>
+        <Button color="inherit" onClick={(e) => {
+                e.preventDefault();
+                signIn();
+            }} >
+             Login
         </Button>
         );
     };
