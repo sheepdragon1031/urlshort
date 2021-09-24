@@ -197,7 +197,7 @@ function CardPackage ({deleUrl, data, index, putURL, putMeta}){
                            value={metadata.metaDdescription|| ''}
                            multiline
                            rows={4}
-                           onChange={e=>setMetadata({...metadata, metaTmetaDdescriptionitle: e.target.value})} 
+                           onChange={e=>setMetadata({...metadata, metaDdescription: e.target.value})} 
                            // value={urlText}
                            variant="outlined" />
                     </CardContent>
