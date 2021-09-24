@@ -54,10 +54,11 @@ export default function Home() {
     indexurl(userID)
   }, [])
   const errorAlert = (res) =>{
+    console.log(res);
     if(res == "not working web url"){
       setAlert("not working web url")
     }
-    else if(res.message){
+    else if(res){
       if(res.message == "This url wrong site orientation"){
         setAlert("This url wrong site orientation")
       }
