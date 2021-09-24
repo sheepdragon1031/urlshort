@@ -1,0 +1,13 @@
+{
+    "scripts": {
+        "dev:frontend": "cd frontend && yarn dev",
+        "build:frontend": "cd frontend && yarn build",
+        "export:frontend": "cd frontend && yarn export",
+        "start:frontend": "cd frontend && yarn start",
+        "dev:backend": "cd strapiurl && strapi develop",
+        "build:backend": "cd strapiurl && strapi build",
+        "start:backend": "cd strapiurl && strapi start"
+        
+    }
+}
+ 
