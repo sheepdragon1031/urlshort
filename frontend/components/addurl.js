@@ -15,6 +15,7 @@ function AddUrl({postUrl, createID}){
             margin: '0.5rem auto'
         },
         TextField:{
+            marginTop: '1rem',
             padding: '0 0.5rem'
         }
     })
