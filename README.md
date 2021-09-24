@@ -26,6 +26,8 @@ cd strapiurl && yarn install
 ### 4. Start the frontend and strapiurl application
 
 ```sh
-cd frontend && yarn dev
-cd strapiurl && strapi develop
+yarn dev:frontend
+```
+```sh
+yarn dev:backend
 ```
