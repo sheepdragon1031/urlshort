@@ -78,7 +78,7 @@ function CardPackage ({deleUrl, data, index, putURL, putMeta}){
         metaDdescription: data.metatext,
     })
     return (
-            <>
+            <div key={`div-${data.id}`}>
             <Card key={`card-${data.id}`} className={classes.card} >
                 <Box className={classes.box}>
                     <CardContent className={classes.cardContent}>
@@ -204,7 +204,7 @@ function CardPackage ({deleUrl, data, index, putURL, putMeta}){
                 </Card>:
                 <></>
             }
-            </>
+            </div>
               
     )
 }

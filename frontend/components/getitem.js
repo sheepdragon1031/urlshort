@@ -6,7 +6,7 @@ function Getitem ({urlList, deleUrl, putURL, putMeta}){
             {urlList
                 .sort((a, b) => b.created_at.localeCompare(a.created_at))
                 .map((data, i) => (
-                    <CardPackage key={i}  deleUrl={deleUrl} data={data} index={i} putURL={putURL} putMeta={putMeta}/>
+                    <CardPackage key={`page-${data.url}`}  deleUrl={deleUrl} data={data} index={i} putURL={putURL} putMeta={putMeta}/>
                 ))}
             
         </div>
