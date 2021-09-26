@@ -14,11 +14,10 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useSession, signIn, signOut } from "next-auth/client"
+import { useSession, getSession , signIn, signOut } from "next-auth/client"
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 
-let hostip = "http://localhost:1337"
 
 
 const useStyles = makeStyles({
@@ -37,24 +36,13 @@ export default function Home() {
   const [session, loading] = useSession()
   const [urlList, seturlList] = useState([]);
   const classes = useStyles();
-  const userID = session? session.user.email : '@anonymous$'
+ 
   const [alert, setAlert] = useState(false);
-
   const indexurl = async (userID) =>{
-    const result = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/urlshorts?userid=${userID}`);
-    console.log(userID);
+    const result = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/urlshorts?userid=${session?session.user.email:'anonymous'}`);
     seturlList(result?.data);
   }
-  useEffect(async () => {
-    indexurl(userID)
-  }, [userID]);
-
-  const deleteURLCallBack = useCallback(async (pid) => {
-    await deleUrl(pid)
-    indexurl(userID)
-  }, [])
   const errorAlert = (res) =>{
-    console.log(res);
     if(res == "not working web url"){
       setAlert("not working web url")
     }
@@ -70,24 +58,33 @@ export default function Home() {
       setAlert(false)
     }
   }
+
+  useEffect(async () => {
+     indexurl()
+  }, [loading]);
+
+  const deleteURLCallBack = useCallback(async (pid) => {
+    await deleUrl(pid)
+    indexurl()
+  }, [loading, urlList])
   const postUrlCallBack = useCallback(async (pid) => {
-    let res = await postUrl(pid, userID)
-    indexurl(userID)
+    let res = await postUrl(pid, session? session.user.email:'anonymous')
+    indexurl()
     errorAlert(res)
-  }, [])
+  }, [loading, urlList])
  
   const putURLCallBack = useCallback(async (pid, url2) => {
     let res = await putUrl(pid, url2)
-    indexurl(userID)
+    indexurl()
     errorAlert(res)
-  }, [])
+  }, [loading, urlList])
 
   const putMetaCallBack = useCallback(async (pid, meta) => {
-    // console.log(pid, meta);
     await putMeta(pid, meta)
-    indexurl(userID)
-  }, [])
-  
+    indexurl()
+  }, [loading, urlList])
+
+
   return (
     <>
       <Head>
