@@ -79,7 +79,7 @@ function CardPackage ({deleUrl, data, index, putURL, putMeta}){
     })
     return (
             <>
-            <Card key={index} className={classes.card} >
+            <Card key={`card-${data.id}`} className={classes.card} >
                 <Box className={classes.box}>
                     <CardContent className={classes.cardContent}>
                     <Typography component="div" variant="h5">
@@ -139,7 +139,7 @@ function CardPackage ({deleUrl, data, index, putURL, putMeta}){
             </Card>
             {
                 edit?
-                <Card key={`edit-${index}`} className={classes.card} >
+                <Card key={`edit-${data.id}`} className={classes.card} >
                     <CardContent className={classes.cardContentUpdata}>
                         <TextField 
                             className={classes.updataUrl} 
@@ -158,7 +158,7 @@ function CardPackage ({deleUrl, data, index, putURL, putMeta}){
             } 
             {
                  metaEdit?
-                 <Card key={`metaedit-${index}`} className={classes.card} >
+                 <Card key={`metaedit-${data.id}`} className={classes.card} >
                     <CardContent className={classes.cardContentmeta} >
                         <Container className={classes.cardContentmetas}>
                             <TextField 
