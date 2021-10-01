@@ -48,7 +48,6 @@ const Tourl = ( context ) => {
                             {urlData.url}
             </Typography>
         </Container>
-      
     
     </>
   )
