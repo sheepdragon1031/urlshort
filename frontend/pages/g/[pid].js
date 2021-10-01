@@ -4,14 +4,15 @@ import axios from "axios";
 import { NextSeo } from 'next-seo';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 
 const useStyles = makeStyles((theme) => ({
-  textField:{
-      padding: '2rem 0rem',
-      textAlign: 'center'
+    textField:{
+        padding: '2rem 0rem',
+        textAlign: 'center'
   },
-  
 }))
 
 export async function getServerSideProps(context) {
@@ -25,6 +26,10 @@ export async function getServerSideProps(context) {
 const Tourl = ( context ) => {
   const urlData = context
   const classes = useStyles();
+  const router = useRouter() 
+  useEffect(()=>{
+    router.push(urlData['url2']) 
+  },[router, urlData])
   return (
     <>
         <Appbar />
