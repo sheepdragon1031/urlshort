@@ -32,7 +32,7 @@ export const postUrl = async (urlText, createID) => {
       })
       .catch(async (error) =>{
         if(error.response){
-          if(error.response.status == 404){
+          if(error.response.status === 404){
             return 'not working web url'
             console.log('not working web url')
           }
@@ -56,7 +56,7 @@ export const postUrl = async (urlText, createID) => {
       })
       .catch(async (error) =>{
         if(error.response){
-          if(error.response.status == 404){
+          if(error.response.status === 404){
             return 'not working web url'
             console.log('not working web url')
           }
